@@ -34,11 +34,5 @@ def content():
     directories = next(os.walk(cwd))[1]
     return render_template("index_files.html", cwd = cwd, files = files, directories = directories)
 
-
-#@app.route("/content")
-#def content():
-#   files = os.listdir(os.getcwd())
-#   return jsonify({"content": files})
-
 if __name__ == "__main__":
     app.run(debug = True)
