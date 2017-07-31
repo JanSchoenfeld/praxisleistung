@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<div>
+    <h3>Current working directory: {{cwd}}</h3>
+</div>
+<div>
+    <form action="{{ url_for('browse_path') }}" method="post">
+        <input type="text" name="filepath" value={{cwd}} size="50" required>
+        <input type="submit">
+    </form>
+</div>
+
+<div>
+    <form action="{{ url_for('content') }}" method="get">
+        <button type="submit" name="submitButton" value="ListFiles">List Files</button>
+    </form>
+</div>
+
+<div>
+    <form action="{{ url_for('browse_path') }}" method="post">
+        <button type="submit" name="filepath">One directory up</button>
+    </form>
+</div>
+
+
+<div>
+    <h3>Directories:</h3>
+    {% for directory in directories %}
+    <p>{{ directory }}</p>
+    {% endfor %}
+</div>
+    
+<div>
+    <h3>Files:</h3>
+    {% for file in files %}
+    <p>{{ file }}</p>
+    {% endfor %}
+</div>
+    
