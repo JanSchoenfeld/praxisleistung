@@ -31,10 +31,10 @@ def browse_path():
 def content():
     cwd = os.getcwd()
     files = next(os.walk(cwd))[2]
-    files_uni = [i.decode('UTF-8') if isinstance(i, basestring) else i for i in files]
+    files_unicode = [i.decode('UTF-8') if isinstance(i, basestring) else i for i in files]
     directories = next(os.walk(cwd))[1]
-    directories_uni = [i.decode('UTF-8') if isinstance(i, basestring) else i for i in directories]
-    return render_template("index_files.html", cwd = cwd, files = files_uni, directories = directories_uni)
+    directories_unicode = [i.decode('UTF-8') if isinstance(i, basestring) else i for i in directories]
+    return render_template("index_files.html", cwd = cwd, files = files_unicode, directories = directories_unicode)
 
 @app.route("/open", methods = ["POST", "GET"])
 def read_file():
