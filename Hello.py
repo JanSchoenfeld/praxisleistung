@@ -1,6 +1,5 @@
 import os
-from flask.json import jsonify
-from flask import Flask, redirect, url_for, request, render_template, Markup
+from flask import Flask, url_for, request, render_template
 from flask_bootstrap import Bootstrap
 
 def create_app():
@@ -31,8 +30,10 @@ def browse_path():
 def content():
     cwd = os.getcwd()
     files = next(os.walk(cwd))[2]
+    files_uni = [i.decode('UTF-8') if isinstance(i, basestring) else i for i in files]
     directories = next(os.walk(cwd))[1]
-    return render_template("index_files.html", cwd = cwd, files = files, directories = directories)
+    directories_uni = [i.decode('UTF-8') if isinstance(i, basestring) else i for i in directories]
+    return render_template("index_files.html", cwd = cwd, files = files_uni, directories = directories_uni)
 
 if __name__ == "__main__":
     app.run(debug = True)
