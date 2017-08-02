@@ -4,7 +4,7 @@
 </div>
 <div>
   <form action="{{ url_for('browse_path') }}" method="post">
-    <input type="text" name="filepath" value={{cwd}} size="50" required>
+    <input type="text" name="path" value={{cwd}} size="50" required>
     <button type="submit">Change Path</button>
   </form>
   </form>
@@ -18,6 +18,6 @@
 
 <div>
   <form action="{{ url_for('browse_path') }}" method="post">
-    <button type="submit" name="filepath">One directory up</button>
+    <button type="submit" name="path">One directory up</button>
   </form>
 </div>

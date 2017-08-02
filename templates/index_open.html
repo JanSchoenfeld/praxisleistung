@@ -21,25 +21,12 @@
     </form>
 </div>
 
-<div>
-    <form action="{{ url_for('read_file') }}" method="post">
-        <input type="text" name="filepath"  size="20" required>
-        <button type="submit">Open file</button>
-    </form>
-</div>
 
 
 <div>
-    <h3>Directories:</h3>
-    {% for directory in directories %}
-    <p>{{ directory }}</p>
-    {% endfor %}
-</div>
-    
-<div>
-    <h3>Files:</h3>
-    {% for file in files %}
-    <p>{{ file }}</p>
+    <h3>{{filename}}</h3>
+    {% for line in open_file %}
+        <div>{{ line|safe }}</div>
     {% endfor %}
 </div>
     
