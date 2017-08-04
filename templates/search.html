@@ -23,6 +23,14 @@
 </div>
 
 <div>
+    <form action="{{ url_for('read_file') }}" method="post">
+        <input type="text" name="filepath"  size="20" required>
+        <button type="submit">Open file</button>
+    </form>
+</div>
+
+
+<div>
     <form action="{{ url_for('browse_path') }}" method="post">
         <button type="submit" name="path">One directory up</button>
     </form>
@@ -30,10 +38,13 @@
 
 
 
-<pre>
-    <h3>{{filename}}</h3>
-    {% for line in open_file %}
-        {{ line|safe }}
+<div>
+    <p>Search for <b>{{search_string}}</b>: </p>
+    {% if resultlist|length > 0 %}
+    {% for result in resultlist %}
+    <p>{{ result }}</p>
     {% endfor %}
-</pre>
-    
+    {% else %}
+    <p>No results found.</p>
+    {% endif %}
+</div>
