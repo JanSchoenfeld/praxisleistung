@@ -1,13 +1,7 @@
-import os
-import io
+import os, io, magic
 from flask import Flask, url_for, request, render_template
 
-def create_app():
-    app = Flask(__name__)
-    return app
-
-app = create_app()
-
+app = Flask(__name__)
 
 # Root URL, 127.0.0.1:5000/
 # Offers interface to change working directory and view files.
@@ -52,6 +46,7 @@ def read_file():
     return render_template("index_open.html", open_file = file_data, cwd = cwd, filename = filename)
 
 
+#Method to serch for a string in a directories .txt files
 @app.route('/search', methods =['POST', 'GET'])
 def search_files():
     cwd = os.getcwd()
@@ -64,6 +59,7 @@ def search_files():
     return render_template("search.html", resultlist = resultlist, search_string = search_string, cwd = cwd)
 
 
+#Method to find all .txt files in a directory
 def find_txt():
     txtlist = list()
     for file in os.listdir(os.getcwd()):
@@ -72,4 +68,4 @@ def find_txt():
     return txtlist
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run(host='0.0.0.0', port=8080, debug=True)

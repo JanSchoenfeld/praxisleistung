@@ -1,7 +1,11 @@
 <!DOCTYPE html>
+
+<!--Displays the current path the user is on-->
 <div>
     <h3>Current working directory: {{cwd}}</h3>
 </div>
+
+<!-- Input field to change the current path -->
 <div>
     <form action="{{ url_for('browse_path') }}" method="post">
         <input type="text" name="path" value={{cwd}} size="50" required>
@@ -9,18 +13,14 @@
     </form>
 </div>
 
+<!-- Button to list all files/folders in the current directory -->
 <div>
     <form action="{{ url_for('content') }}" method="get">
         <button type="submit" name="submitButton" value="ListFiles">List Files</button>
     </form>
 </div>
 
-<div>
-    <form action="{{ url_for('browse_path') }}" method="post">
-        <button type="submit" name="path">One directory up</button>
-    </form>
-</div>
-
+<!-- Input field to search for a String in all .txt files in the current directory -->
 <div>
   <form action="{{ url_for('search_files') }}" method="post">
     <input type="text" name="search_string" placeholder="Search files.." size="20" required>
@@ -28,10 +28,18 @@
   </form>
 </div>
 
+<!-- Input field to open a file and display it -->
 <div>
     <form action="{{ url_for('read_file') }}" method="post">
         <input type="text" name="filepath"  size="20" required>
         <button type="submit">Open file</button>
+    </form>
+</div>
+
+<!-- Navigate to the parent directory -->
+<div>
+    <form action="{{ url_for('browse_path') }}" method="post">
+        <button type="submit" name="path">One directory up</button>
     </form>
 </div>
 
