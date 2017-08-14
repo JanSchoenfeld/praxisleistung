@@ -1,4 +1,4 @@
-import os, io, magic
+import os, io, magic, gzip, codecs
 from flask import Flask, url_for, request, render_template
 
 app = Flask(__name__)
@@ -41,8 +41,10 @@ def content():
 def read_file():
     filename = request.form['filepath']
     cwd = os.getcwd()
-    file_data = io.open(cwd + '/' + filename, 'r', encoding = 'utf-8', errors = 'replace').readlines()
-    file_data = [line.strip() for line in file_data]
+    if filename.endswith('.gz'):
+        file_data = codecs.getreader('utf-8')(gzip.open(filename),errors='replace')
+    else:
+        file_data = codecs.getreader('utf-8')(open(filename), errors='replace')
     return render_template("index_open.html", open_file = file_data, cwd = cwd, filename = filename)
 
 
@@ -59,13 +61,16 @@ def search_files():
     return render_template("search.html", resultlist = resultlist, search_string = search_string, cwd = cwd)
 
 
-#Method to find all .txt files in a directory
+    #Method to find all .txt files in a directory
 def find_txt():
     txtlist = list()
-    for file in os.listdir(os.getcwd()):
-        if file.endswith(".txt"):
+    files = next(os.walk(os.getcwd()))[2]
+    mime = magic.Magic(mime=True)
+    for file in files:
+        if (mime.from_file(file) == 'text/plain'): 
             txtlist.append(file)
     return txtlist
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080, debug=True)
