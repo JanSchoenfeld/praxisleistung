@@ -2,10 +2,10 @@
 
 {% block data %}
 <pre>
-    <h3>{{filename}}</h3>
-    {% for line in open_file %}
-        {{ line|safe }}
-    {% endfor %}
+    <h6 class="font-weight-bold">{{filename}}</h6>
+    {% for line in open_file -%}
+        <p style="margin-bottom: 0rem;">{{ line }}</p>
+    {%- endfor %}
 </pre>
 {% endblock %}
     
