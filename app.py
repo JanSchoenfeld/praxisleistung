@@ -29,8 +29,10 @@ def browse_path():
 def content():
     cwd = os.getcwd()
     files = next(os.walk(cwd))[2]
-    files_unicode = [i.decode('UTF-8', 'replace') if isinstance(i, basestring) else i for i in files]
+    files = [name for name in files if not name.startswith(".")]
+    files_unicode = [i.decode('UTF-8', 'replace') if isinstance(i, basestring) else i for i in files]    
     directories = next(os.walk(cwd))[1]
+    directories = [name for name in directories if not name.startswith(".")]
     directories_unicode = [i.decode('UTF-8', 'replace') if isinstance(i, basestring) else i for i in directories]
     return render_template("index_files.html", cwd=cwd, files=files_unicode, directories=directories_unicode)
 
@@ -56,6 +58,7 @@ def search_files():
     txtlist = find_txt()
     for file in txtlist:
         if file.endswith('.gz'):
+            #TODO
             zipped_content = codecs.getreader('utf-8')(gzip.open(file), errors='replace')
             file_content = zipped_content.read()
             zipped_content.close()
