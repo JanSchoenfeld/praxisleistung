@@ -23,7 +23,7 @@
     <div style="padding:0.5rem;">
         <form action="{{ url_for('browse_path') }}" method="post">
             <input type="text" id="input_path" name="path" value={{cwd}} size="50" required>
-            <button type="submit" class="btn btn-primary">Change Path</button>
+            <button type="submit" class="btn btn-primary" style="width: 9rem">Change Path</button>
         </form>
         </form>
     </div>
@@ -32,7 +32,7 @@
     <div style="padding:0.5rem;">
         <form action="{{ url_for('search_files') }}" method="post">
             <input type="text" name="search_string" placeholder="Search files.." size="50" required>
-            <button type="submit" class="btn btn-primary" name="submitButton" value="ListFiles">Search in files</button>
+            <button type="submit" class="btn btn-primary" name="submitButton" value="ListFiles" style="width: 9rem">Search in files</button>
         </form>
     </div>
 
@@ -40,21 +40,21 @@
     <div style="padding:0.5rem;">
         <form action="{{ url_for('read_file') }}" method="post">
             <input type="text" name="filepath" placeholder="Open file.." size="50" required>
-            <button type="submit" class="btn btn-primary">Open file</button>
+            <button type="submit" class="btn btn-primary" style="width: 9rem">Open file</button>
         </form>
     </div>
 
     <!-- Button to list all files/folders in the current directory -->
     <div style="padding:0.5rem;">
             <form action="{{ url_for('content') }}" method="get">
-                <button type="submit" class="btn btn-primary" name="submitButton" value="ListFiles">List Files</button>
+                <button type="submit" class="btn btn-primary" name="submitButton" value="ListFiles" style="width: 9rem">List Files</button>
             </form>
         </div>
 
     <!-- Navigate to the parent directory -->
     <div style="padding:0.5rem;">
         <form action="{{ url_for('browse_path') }}" method="post">
-            <button type="submit" class="btn btn-primary" name="path">One directory up</button>
+            <button type="submit" class="btn btn-primary" name="path" style="width: 9rem">One directory up</button>
         </form>
     </div>
 
