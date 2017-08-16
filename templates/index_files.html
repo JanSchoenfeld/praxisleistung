@@ -2,18 +2,23 @@
 
 {% block data %}
 <!-- List the directories and files in the current directory -->
-<div>
-    <h3>Directories:</h3>
+<div style=padding:1rem;>
+    <h6 class="font-weight-bold" style="padding:1rem;">Directories:</h6>
+    <ul class="list-group">
     {% for directory in directories %}
-    <p>{{ directory }}</p>
+    <li class="list-group-item">{{ directory }}</li>
     {% endfor %}
 </div>
     
-<div>
-    <h3>Files:</h3>
+<div style=padding:1rem;>
+    <h6 class="font-weight-bold" style="padding:1rem;">Files:</h6>
+    <ul class="list-group">
     {% for file in files %}
-    <p>{{ file }}</p>
+    <li class="list-group-item">{{ file }}</li>
     {% endfor %}
 </div>
 {% endblock %}
+
+
+
     
