@@ -2,11 +2,12 @@
 
 {% block data %}
 <!-- Display the search results as list -->
-<div>
+<div style=padding:1rem;>
     <p>Search for <b>{{search_string}}</b>: </p>
     {% if resultlist|length > 0 %}
+    <ul class="list-group">
     {% for result in resultlist %}
-    <p>{{ result }}</p>
+    <li class="list-group-item">{{ result }}</li>
     {% endfor %}
     {% else %}
     <p>No results found.</p>
