@@ -58,7 +58,6 @@ def search_files():
     filelist = find_files()
     for file in filelist:
         if file.endswith('.gz'):
-            #TODO
             zipped_content = codecs.getreader('utf-8')(gzip.open(file), errors='replace')
             file_content = zipped_content.read()
             zipped_content.close()
