@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
 
-    <title>Browse Server Files</title>
+    <title>Server Web-Schnittstelle</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
@@ -16,7 +16,7 @@
     <div>
     <!--Displays the current path the user is on-->
     <div>
-        <h5 class="font-weight-bold" style="padding:0.5rem;">Current working directory: {{cwd}}</h5>
+        <h5 class="font-weight-bold" style="padding:0.5rem;">Aktuelles Arbeitsverzeichnis: {{cwd}}</h5>
     </div>
 
     <div class="form-group">
@@ -24,37 +24,37 @@
     <div style="padding:0.5rem;">
         <form action="{{ url_for('browse_path') }}" method="post">
             <input type="text" id="input_path" name="path" value={{cwd}} size="50" required>
-            <button type="submit" class="btn btn-primary" style="width: 9rem">Change Path</button>
+            <button type="submit" class="btn btn-primary" style="width: 9rem">Pfad ändern</button>
         </form>
     </div>
 
     <!-- Input field to search for a String in all .txt files in the current directory -->
     <div style="padding:0.5rem;">
         <form action="{{ url_for('search_files') }}" method="post">
-            <input type="text" name="search_string" placeholder="Search files.." size="50" required>
-            <button type="submit" class="btn btn-primary" name="submitButton" value="ListFiles" style="width: 9rem">Search in files</button>
+            <input type="text" name="search_string" placeholder="Suchebegriff.." size="50" required>
+            <button type="submit" class="btn btn-primary" name="submitButton" value="ListFiles" style="width: 9rem">Suche in Dateien</button>
         </form>
     </div>
 
     <!-- Input field to open a file and display it -->
     <div style="padding:0.5rem;">
         <form action="{{ url_for('read_file') }}" method="post">
-            <input type="text" name="filepath" placeholder="Open file.." size="50" required>
-            <button type="submit" class="btn btn-primary" style="width: 9rem">Open file</button>
+            <input type="text" name="filepath" placeholder="Öffne Datei.." size="50" required>
+            <button type="submit" class="btn btn-primary" style="width: 9rem">Öffne Datei</button>
         </form>
     </div>
 
     <!-- Button to list all files/folders in the current directory -->
     <div style="padding:0.5rem;">
             <form action="{{ url_for('content') }}" method="get">
-                <button type="submit" class="btn btn-primary" name="submitButton" value="ListFiles" style="width: 9rem">List Files</button>
+                <button type="submit" class="btn btn-primary" name="submitButton" value="ListFiles" style="width: 9rem">Verzeichnisinhalt</button>
             </form>
         </div>
 
     <!-- Navigate to the parent directory -->
     <div style="padding:0.5rem;">
         <form action="{{ url_for('browse_path') }}" method="post">
-            <button type="submit" class="btn btn-primary" name="path" style="width: 9rem">One directory up</button>
+            <button type="submit" class="btn btn-primary" name="path" style="width: 9rem">Überverzeichnis</button>
         </form>
     </div>
 
