@@ -60,9 +60,7 @@ def search_files():
         if file.endswith('.gz'):
             #TODO
             zipped_content = codecs.getreader('utf-8')(gzip.open(file), errors='replace')
-            print zipped_content
             file_content = zipped_content.read()
-            print file_content
             zipped_content.close()
             if search_string in file_content:
                 resultlist.append(file)
