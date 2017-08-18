@@ -73,13 +73,13 @@ def search_files():
 def find_files():
     filelist = list()
     files = next(os.walk(os.getcwd()))[2]
-    mime = magic.Magic(mime=True)
+    #mime = magic.Magic(mime=True)
     for file in files:
-        if mime.from_file(file) == 'text/plain':
+        if magic.from_file(file, mime=True) == 'text/plain':
             	filelist.append(file)
-	elif mime.from_file(file) == 'application/gzip':
+	elif magic.from_file(file, mime=True) == 'application/gzip':
 		filelist.append(file)
-	elif mime.from_file(file) == 'text/x-python':
+	elif magic.from_file(file, mime=True) == 'text/x-python':
 		filelist.append(file)
     return filelist
 
