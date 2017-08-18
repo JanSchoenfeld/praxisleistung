@@ -34,7 +34,7 @@ def content():
     directories = next(os.walk(cwd))[1]
     directories = [name for name in directories if not name.startswith(".")]
     directories_unicode = [i.decode('UTF-8', 'replace') if isinstance(i, basestring) else i for i in directories]
-    return render_template("index_files.html", cwd=cwd, files=files_unicode, directories=directories_unicode)
+    return render_template("index_files.html", cwd=cwd, files=files_unicode, directories=directories_unicode, length_dir=len(directories_unicode), length_fil=len(files_unicode))
 
 
 # Method to open a file and show its content on an extended index.html
@@ -66,7 +66,7 @@ def search_files():
         else:
             if search_string in io.open(file, 'r', encoding='utf-8', errors='replace').read():
                 resultlist.append(file)
-    return render_template("search.html", resultlist=resultlist, search_string=search_string, cwd=cwd)
+    return render_template("search.html", resultlist=resultlist, search_string=search_string, cwd=cwd, length=len(resultlist))
 
 
 # Method to find all .txt files in a directory

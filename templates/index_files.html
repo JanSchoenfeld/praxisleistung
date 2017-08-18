@@ -2,21 +2,37 @@
 
 {% block data %}
 <!-- List the directories and files in the current directory -->
+{% if length_dir == 0 and length_fil == 0 %}
+<p> Ordner ist leer.</p>
+{% else %}
 <div style=padding:1rem;>
-    <h6 class="font-weight-bold" style="padding:1rem;">Ordner:</h6>
+    {% if length_dir == 0 %}
+    {% else %}
+    <h6 class="font-weight-bold" style="padding:0,5rem;">Ordner:</h6>
+    <p style="padding:0,5rem;">{{length_dir}} Ordner</p>
     <ul class="list-group">
     {% for directory in directories %}
     <li class="list-group-item">{{ directory }}</li>
     {% endfor %}
+    {% endif %}
 </div>
     
 <div style=padding:1rem;>
-    <h6 class="font-weight-bold" style="padding:1rem;">Dateien:</h6>
+    {% if length_fil == 0 %}
+    {% else %}
+    <h6 class="font-weight-bold">Dateien:</h6> 
+    {% if length_fil == 1 %}
+    <p style="padding:0,5rem;">{{length_fil}} Datei</p>
+    {% else %}
+    <p style="padding:0,5rem;">  {{length_fil}} Dateien</p>
+    {% endif %}
     <ul class="list-group">
     {% for file in files %}
     <li class="list-group-item">{{ file }}</li>
     {% endfor %}
+    {% endif %}
 </div>
+{% endif %}
 {% endblock %}
 
 

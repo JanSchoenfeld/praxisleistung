@@ -5,6 +5,7 @@
 <div style=padding:1rem;>
     <p>Suche für <b>{{search_string}}</b>: </p>
     {% if resultlist|length > 0 %}
+    <p>{{length}} Treffer</p>
     <ul class="list-group">
     {% for result in resultlist %}
     <li class="list-group-item">{{ result }}</li>
