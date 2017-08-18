@@ -3,6 +3,7 @@ from flask import Flask, url_for, request, render_template
 
 app = Flask(__name__)
 
+
 # Root URL, 127.0.0.1:5000/
 # Offers interface to change working directory and view files.
 @app.route("/")
@@ -12,7 +13,7 @@ def start():
 
 
 # Method to change the current working directory if specified, or go up into the parent directory
-@app.route("/", methods = ["POST", "GET"])
+@app.route("/", methods=["POST", "GET"])
 def browse_path():
     filepath = request.form['path']
     if filepath == "":
@@ -29,60 +30,75 @@ def browse_path():
 def content():
     cwd = os.getcwd()
     files = next(os.walk(cwd))[2]
-    files = [name for name in files if not name.startswith(".")]
-    files_unicode = [i.decode('UTF-8', 'replace') if isinstance(i, basestring) else i for i in files]    
+    files_unicode = [
+        i.decode('UTF-8', 'replace') if isinstance(i, basestring) else i
+        for i in files
+    ]
     directories = next(os.walk(cwd))[1]
-    directories = [name for name in directories if not name.startswith(".")]
-    directories_unicode = [i.decode('UTF-8', 'replace') if isinstance(i, basestring) else i for i in directories]
-    return render_template("index_files.html", cwd=cwd, files=files_unicode, directories=directories_unicode)
+    directories_unicode = [
+        i.decode('UTF-8', 'replace') if isinstance(i, basestring) else i
+        for i in directories
+    ]
+    return render_template(
+        "index_files.html",
+        cwd=cwd,
+        files=files_unicode,
+        directories=directories_unicode)
 
 
 # Method to open a file and show its content on an extended index.html
-@app.route("/open", methods = ["POST", "GET"])
+@app.route("/open", methods=["POST", "GET"])
 def read_file():
     filename = request.form['filepath']
     cwd = os.getcwd()
     if filename.endswith('.gz'):
-        file_data = codecs.getreader('utf-8')(gzip.open(filename), errors='replace')
+        file_data = codecs.getreader('utf-8')(
+            gzip.open(filename), errors='replace')
     else:
         file_data = codecs.getreader('utf-8')(open(filename), errors='replace')
-    return render_template("index_open.html", open_file=file_data, cwd=cwd, filename=filename)
+    return render_template(
+        "index_open.html", open_file=file_data, cwd=cwd, filename=filename)
 
 
 # Method to serch for a string in a directories .txt files
-@app.route('/search', methods =['POST', 'GET'])
+@app.route('/search', methods=['POST', 'GET'])
 def search_files():
     cwd = os.getcwd()
     resultlist = list()
     search_string = request.form['search_string']
-    filelist = find_files()
-    for file in filelist:
+    txtlist = find_txt()
+    for file in txtlist:
         if file.endswith('.gz'):
-            zipped_content = codecs.getreader('utf-8')(gzip.open(file), errors='replace')
+            zipped_content = codecs.getreader('utf-8')(
+                gzip.open(file), errors='replace')
             file_content = zipped_content.read()
             zipped_content.close()
             if search_string in file_content:
                 resultlist.append(file)
         else:
-            if search_string in io.open(file, 'r', encoding='utf-8', errors='replace').read():
+            if search_string in io.open(
+                    file, 'r', encoding='utf-8', errors='replace').read():
                 resultlist.append(file)
-    return render_template("search.html", resultlist=resultlist, search_string=search_string, cwd=cwd)
+    return render_template(
+        "search.html",
+        resultlist=resultlist,
+        search_string=search_string,
+        cwd=cwd)
 
 
 # Method to find all .txt files in a directory
-def find_files():
-    filelist = list()
+def find_txt():
+    txtlist = list()
     files = next(os.walk(os.getcwd()))[2]
     mime = magic.Magic(mime=True)
     for file in files:
         if mime.from_file(file) == 'text/plain':
-            	filelist.append(file)
-	elif mime.from_file(file) == 'application/gzip':
-		filelist.append(file)
-	elif mime.from_file(file) == 'text/x-python':
-		filelist.append(file)
-    return filelist
-
+            txtlist.append(file)
+        elif mime.from_file(file) == 'application/gzip':
+            txtlist.append(file)
+        elif mime.from_file(file) == 'text/x-python':
+            txtlist.append(file)
+    return txtlist
 
 
 if __name__ == "__main__":
