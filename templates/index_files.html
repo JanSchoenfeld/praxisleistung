@@ -3,7 +3,7 @@
 {% block data %}
 <!-- List the directories and files in the current directory -->
 <div style=padding:1rem;>
-    <h6 class="font-weight-bold" style="padding:1rem;">Ordner:</h6>
+    <h6 class="font-weight-bold" style="padding:1rem;">Directories:</h6>
     <ul class="list-group">
     {% for directory in directories %}
     <li class="list-group-item">{{ directory }}</li>
@@ -11,7 +11,7 @@
 </div>
     
 <div style=padding:1rem;>
-    <h6 class="font-weight-bold" style="padding:1rem;">Dateien:</h6>
+    <h6 class="font-weight-bold" style="padding:1rem;">Files:</h6>
     <ul class="list-group">
     {% for file in files %}
     <li class="list-group-item">{{ file }}</li>

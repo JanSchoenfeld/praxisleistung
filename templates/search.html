@@ -3,14 +3,14 @@
 {% block data %}
 <!-- Display the search results as list -->
 <div style=padding:1rem;>
-    <p>Suche für <b>{{search_string}}</b>: </p>
+    <p>Search for <b>{{search_string}}</b>: </p>
     {% if resultlist|length > 0 %}
     <ul class="list-group">
     {% for result in resultlist %}
     <li class="list-group-item">{{ result }}</li>
     {% endfor %}
     {% else %}
-    <p>Keine Suchergebnisse.</p>
+    <p>No results found.</p>
     {% endif %}
 </div>
 {% endblock %}
