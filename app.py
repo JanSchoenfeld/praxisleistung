@@ -30,7 +30,7 @@ def content():
     cwd = os.getcwd()
     files = next(os.walk(cwd))[2]
     files = [name for name in files if not name.startswith(".")]
-    files_unicode = [i.decode('UTF-8', 'replace') if isinstance(i, basestring) else i for i in files]    
+    files_unicode = [i.decode('UTF-8', 'replace') if isinstance(i, basestring) else i for i in files]
     directories = next(os.walk(cwd))[1]
     directories = [name for name in directories if not name.startswith(".")]
     directories_unicode = [i.decode('UTF-8', 'replace') if isinstance(i, basestring) else i for i in directories]
@@ -76,11 +76,15 @@ def find_files():
     #mime = magic.Magic(mime=True)
     for file in files:
         if magic.from_file(file, mime=True) == 'text/plain':
-            	filelist.append(file)
-	elif magic.from_file(file, mime=True) == 'application/gzip':
-		filelist.append(file)
-	elif magic.from_file(file, mime=True) == 'text/x-python':
-		filelist.append(file)
+            filelist.append(file)
+        elif magic.from_file(file, mime=True) == 'application/gzip':
+            filelist.append(file)
+        elif magic.from_file(file, mime=True) == 'application/x-gzip':
+            filelist.append(file)
+        elif magic.from_file(file, mime=True) == 'message/rfc822':
+            filelist.append(file)
+        elif magic.from_file(file, mime=True) == 'text/x-python':
+            filelist.append(file)
     return filelist
 
 
