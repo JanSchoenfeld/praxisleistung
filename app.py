@@ -52,11 +52,13 @@ def read_file():
 # Method to serch for a string in a directories .txt files
 @app.route('/search', methods =['POST', 'GET'])
 def search_files():
+    i = 0
     cwd = os.getcwd()
     resultlist = list()
     search_string = request.form['search_string']
     filelist = find_files()
     for file in filelist:
+        i += 1
         if file.endswith('.gz'):
             zipped_content = codecs.getreader('utf-8')(gzip.open(file), errors='replace')
             file_content = zipped_content.read()
@@ -66,7 +68,7 @@ def search_files():
         else:
             if search_string in io.open(file, 'r', encoding='utf-8', errors='replace').read():
                 resultlist.append(file)
-    return render_template("search.html", resultlist=resultlist, search_string=search_string, cwd=cwd, length=len(resultlist))
+    return render_template("search.html", resultlist=resultlist, search_string=search_string, cwd=cwd, length=len(resultlist), i=i)
 
 
 # Method to find all .txt files in a directory
